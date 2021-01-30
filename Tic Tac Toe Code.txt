@@ -15,9 +15,7 @@ void set_default(char a[])
 	cout << "\t       |       |      \n";
 	cout << "\t    " << a[6] << "  |   " << a[7] << "   |   " << a[8] << "  \n";
 	cout << "\t       |       |      \n";
-
 }
-
 int checkwin()
 {
 	if (arr[0] == arr[1] && arr[1] == arr[2])
@@ -27,78 +25,70 @@ int checkwin()
 		else
 			return 2;
 	}
-	else
-		if (arr[3] == arr[4] && arr[4] == arr[5])
-		{
-			if (arr[3] == 'X')
-				return 1;
-			else
-				return 2;
-		}
+	else if (arr[3] == arr[4] && arr[4] == arr[5])
+	{
+		if (arr[3] == 'X')
+			return 1;
 		else
-			if (arr[6] == arr[7] && arr[7] == arr[8])
-			{
-				if (arr[6] == 'X')
-					return 1;
-				else
-					return 2;
-			}
-			else
-				if (arr[0] == arr[3] && arr[3] == arr[6])
-				{
-					if (arr[0] == 'X')
-						return 1;
-					else
-						return 2;
-				}
-				else
-					if (arr[1] == arr[4] && arr[4] == arr[7])
-					{
-						if (arr[1] == 'X')
-							return 1;
-						else
-							return 2;
-					}
-					else
-						if (arr[2] == arr[5] && arr[5] == arr[8])
-						{
-							if (arr[2] == 'X')
-								return 1;
-							else
-								return 2;
-						}
-						else
-							if (arr[0] == arr[4] && arr[4] == arr[8])
-							{
-								if (arr[0] == 'X')
-									return 1;
-								else
-									return 2;
-							}
-							else
-								if (arr[2] == arr[4] && arr[4] == arr[6])
-								{
-									if (arr[2] == 'X')
-										return 1;
-									else
-										return 2;
-								}
-								else
-									if (arr[0] == arr[3] && arr[3] == arr[6])
-									{
-										if (arr[0] == 'X')
-											return 1;
-										else
-											return 2;
-									}
-									else
-										return 0;
+			return 2;
+	}
+	else if (arr[6] == arr[7] && arr[7] == arr[8])
+	{
+		if (arr[6] == 'X')
+			return 1;
+		else
+			return 2;
+	}
+	else if (arr[0] == arr[3] && arr[3] == arr[6])
+	{
+		if (arr[0] == 'X')
+			return 1;
+		else
+			return 2;
+	}
+	else if (arr[1] == arr[4] && arr[4] == arr[7])
+	{
+		if (arr[1] == 'X')
+			return 1;
+		else
+			return 2;
+	}
+	else if (arr[2] == arr[5] && arr[5] == arr[8])
+	{
+		if (arr[2] == 'X')
+			return 1;
+		else
+			return 2;
+	}
+	else if (arr[0] == arr[4] && arr[4] == arr[8])
+	{
+		if (arr[0] == 'X')
+			return 1;
+		else
+		    return 2;
+	}
+	else if (arr[2] == arr[4] && arr[4] == arr[6])
+	{
+		if (arr[2] == 'X')
+			return 1;
+		else
+			return 2;
+	}
+	else if (arr[0] == arr[3] && arr[3] == arr[6])
+	{
+		if (arr[0] == 'X')
+			return 1;
+		else
+			return 2;
+	}
+	else
+		return 0;
 }
-void mark(int player, int num)
+void replace(int player, int num)
 {
 	if (player == 1)
 	{
-		if (arr[num - 1] != 'O')
+		if ((arr[num - 1] != 'O')&&(arr[num - 1] != 'X'))
 		{
 			arr[num - 1] = 'X';
 		}
@@ -108,14 +98,14 @@ void mark(int player, int num)
 			system("pause");
 			system("cls");
 			set_default(arr);
-			cout << "\n Player " << player << " , enter number : ";
+			cout << "\n Player " << player << " , enter a number : ";
 			cin >> input;
-			mark(player, input);
+			replace(player, input);
 		}
 	}
 	else
 	{
-		if (arr[num - 1] != 'X')
+		if ((arr[num - 1] != 'X')&&(arr[num - 1] != 'O'))
 		{
 			arr[num - 1] = 'O';
 		}
@@ -125,21 +115,19 @@ void mark(int player, int num)
 			system("pause");
 			system("cls");
 			set_default(arr);
-			cout << "\n Player " << player << " , enter number : ";
+			cout << "\n Player " << player << " , enter a number : ";
 			cin >> input;
-			mark(player, input);
+			replace(player, input);
 		}
 	}
 }
-
 int main()
 {
 	int player1 = 1, player2 = 2;
-
 	int number, result = 0, flag = 0;
 
 	set_default(arr);
-	cout << "\n Player " << player1 << " , enter number : ";
+	cout << "\n Player " << player1 << " , enter a number : ";
 	cin >> input;
 	while ((input >= 10) || (input <= -1))
 	{
@@ -147,86 +135,78 @@ int main()
 		system("pause");
 		system("cls");
 		set_default(arr);
-		cout << "\n Player " << player1 << " , enter number : ";
+		cout << "\n Player " << player1 << " , enter a number : ";
 		cin >> input;
 	}
 	if (input <= 9 && input > 0)
 	{
 		number = input;
-		mark(player1, number);
+		replace(player1, number);
 		system("cls");
 		set_default(arr);
 
 		for (int i = 1; i < 5; i++)
 		{
-
 			result = checkwin();
 			if (result == 1)
 			{
-				cout << "\n Player " << player1 << " , enter number : ";
-				cout << "\t  player " << player1 << " , Win ";
+				cout << "\n Player " << player1 << " , enter a number : ";
+				cout << "\t  player " << player1 << "  Win ";
 				flag = 1;
 				break;
 			}
-			else
-				if (result == 2)
-				{
-					cout << "\n Player " << player2 << " , enter number : ";
-					cout << "\t  player " << player2 << " , Win ";
-					flag = 1;
-					break;
-				}
-
-			cout << "\n Player " << player2 << " , enter number : ";
+			else if (result == 2)
+			{
+				cout << "\n Player " << player2 << " , enter a number : ";
+				cout << "\t  player " << player2 << "  Win ";
+				flag = 1;
+				break;
+			}
+			cout << "\n Player " << player2 << " , enter a number : ";
 			cin >> number;
-			mark(player2, number);
+			replace(player2, number);
 			system("cls");
 			set_default(arr);
 
 			result = checkwin();
 			if (result == 1)
 			{
-				cout << "\n Player " << player1 << " , enter number : ";
-				cout << "\t  player " << player1 << " , Win \n";
+				cout << "\n Player " << player1 << " , enter a number : ";
+				cout << "\t  player " << player1 << "  Win \n";
 				flag = 1;
 				break;
 			}
-			else
-				if (result == 2)
-				{
-					cout << "\n Player " << player2 << " , enter number : ";
-					cout << "\t  player " << player2 << " , Win \n";
-					flag = 1;
-					break;
-				}
-		   cout << "\n Player " << player1 << " , enter number : ";
+			else if (result == 2)
+			{
+				cout << "\n Player " << player2 << " , enter a number : ";
+				cout << "\t  player " << player2 << "  Win \n";
+				flag = 1;
+				break;
+			}
+		   cout << "\n Player " << player1 << " , enter a number : ";
 		   cin >> number;
-		   mark(player1, number);
+		   replace(player1, number);
 		   system("cls");
 		   set_default(arr);
 
 		   result = checkwin();
 		   if (result == 1)
 		   {
-			   cout << "\n Player " << player1 << " , enter number : ";
-			   cout << "\t player " << player1 << " , Win \n";
+			   cout << "\n Player " << player1 << " , enter a number : ";
+			   cout << "\t player " << player1 << "  Win \n";
 			   flag = 1;
 			   break;
 		   }
-		   else
-			   if (result == 2)
-			   {
-				   cout << "\n Player " << player2 << " , enter number : ";
-				   cout << "\t  player " << player2 << " , Win \n";
-				   flag = 1;
-				   break;
-			   }
+		   else if (result == 2)
+		   {
+			   cout << "\n Player " << player2 << " , enter a number : ";
+			   cout << "\t  player " << player2 << "  Win \n";
+			   flag = 1;
+			   break;
+		   }
 		}
 		if (flag == 0)
-			cout << " \n Sorry, The game is a draw \n";
-		
+			cout << " \n\t The game is a draw \n";
 	}
-	
-
 	return 0;
 }
